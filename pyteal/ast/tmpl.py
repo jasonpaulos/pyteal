@@ -1,0 +1,19 @@
+from ..types import valid_tmpl
+from ..errors import TealInternalError
+from .expr import LeafExpr
+
+class Tmpl(LeafExpr):
+
+    # default constrcutor
+    def __init__(self, tmpl_v:str) -> None:
+        valid_tmpl(tmpl_v)
+        self.name = tmpl_v
+
+    def __str__(self):
+        return self.name
+
+    def __teal__(self):
+        raise TealInternalError("Tmpl is not expected here")
+
+    def type_of(self):
+        raise TealInternalError("Tmpl is not expected here")
