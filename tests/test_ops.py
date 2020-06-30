@@ -234,7 +234,7 @@ def test_gtxn():
 def test_if():
     If(Int(0), Txn.sender(), Txn.receiver())
 
-    with pytest.raises(TealTypeError):
+    with pytest.raises(TealTypeMismatchError):
         If(Int(0), Txn.amount(), Txn.sender())
 
     with pytest.raises(TealTypeError):
@@ -248,7 +248,7 @@ def test_itob():
         Itob(Arg(1))
 
 
-def test_itob():
+def test_btoi():
     Btoi(Arg(1))
 
     with pytest.raises(TealTypeError):

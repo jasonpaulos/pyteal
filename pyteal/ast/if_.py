@@ -1,4 +1,4 @@
-from ..types import TealType, require_type
+from ..types import TealType, require_type, types_match
 from ..errors import TealTypeMismatchError
 from ..util import new_label
 from .expr import Expr, NaryExpr
@@ -8,7 +8,11 @@ class If(NaryExpr):
     #default constructor
     def __init__(self, arg0:Expr, arg1:Expr, arg2:Expr) -> None:
         require_type(arg0.type_of(), TealType.uint64)
-        require_type(arg2.type_of(), arg1.type_of())
+
+        t1 = arg1.type_of()
+        t2 = arg2.type_of()
+        if not types_match(t1, t2):
+            raise TealTypeMismatchError(t1, t2)
 
         self.args = [arg0, arg1, arg2]
 

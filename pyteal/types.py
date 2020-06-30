@@ -7,10 +7,20 @@ class TealType(Enum):
     uint64 = 0
     bytes = 1
     anytype = 2
+    none = 3
 
 def require_type(actual, expected):
     if actual != expected and (actual != TealType.anytype) and (expected != TealType.anytype):
         raise TealTypeError(actual, expected)
+
+def types_match(type1: TealType, type2: TealType) -> bool:
+    if type1 == TealType.none or type2 == TealType.none:
+        return False
+
+    if type1 == TealType.anytype or type2 == TealType.anytype:
+        return True
+    
+    return type1 == type2
 
 def valid_address(address:str):
     """ check if address is a valid address with checksum
