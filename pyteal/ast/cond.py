@@ -1,5 +1,6 @@
 from ..types import TealType, require_type
 from ..errors import TealInputError
+from ..util import new_label
 from .expr import NaryExpr
 from .err import Err
 from .if_ import If
@@ -32,16 +33,38 @@ class Cond(NaryExpr):
         self.args = argv        
 
     def __teal__(self):
-        # converting cond to if first
-        def make_if(conds):
-            if len(conds) == 0:
-                return Err()
-            else:
-                e = conds[0]
-                return If(e[0], e[1], make_if(conds[1:]))
+        teal = []
 
-        desugared = make_if(self.args)
-        return desugared.__teal__()
+        labels = []
+        for arg in self.args:
+            l = new_label()
+            cond = arg[0]
+
+            teal += cond.__teal__()
+            teal += [["bnz", l]]
+
+            labels.append(l)
+
+        # err if no conditions are met
+        teal += [["err"]]
+
+        # end label
+        labels.append(new_label())
+        
+        for i, arg in enumerate(self.args):
+            label = labels[i] + ":"
+            branch = arg[1]
+
+            teal += [[label]]
+            teal += branch.__teal__()
+            if i + 1 != len(self.args):
+                teal += [["int", "1"], ["bnz", labels[-1]]]
+        
+        endLabel = labels[-1] + ":"
+
+        teal += [[endLabel]]
+
+        return teal
 
     def __str__(self):
         ret_str = "(Cond"
