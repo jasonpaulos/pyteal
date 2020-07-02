@@ -1,4 +1,5 @@
 from ..types import TealType, require_type
+from ..ir import TealOp, Op
 from .expr import Expr, UnaryExpr
 
 class Itob(UnaryExpr):
@@ -9,7 +10,7 @@ class Itob(UnaryExpr):
         self.child = child
 
     def __teal__(self):
-        return self.child.__teal__() + [["itob"]]
+        return self.child.__teal__() + [TealOp(Op.itob)]
          
     def __str__(self):
          return "(itob {})".format(self.child)

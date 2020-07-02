@@ -1,4 +1,5 @@
 from ..types import TealType, require_type
+from ..ir import TealOp, Op
 from .expr import Expr, UnaryExpr
 
 class Sha256(UnaryExpr):   
@@ -9,7 +10,7 @@ class Sha256(UnaryExpr):
         self.child = child
 
     def __teal__(self):
-        return self.child.__teal__() + [["sha256"]]
+        return self.child.__teal__() + [TealOp(Op.sha256)]
          
     def __str__(self):
          return "(sha256 {})".format(self.child)

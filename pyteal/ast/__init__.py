@@ -11,7 +11,7 @@ from .int import Int
 from .arg import Arg
 from .txn import Txn, TxnField
 from .gtxn import Gtxn
-from .global_ import Global
+from .global_ import Global, GlobalField
 
 # meta
 from .tmpl import Tmpl
@@ -26,8 +26,6 @@ from .sha512_256 import Sha512_256
 from .keccak256 import Keccak256
 
 # binary ops
-from .and_ import And
-from .or_ import Or
 from .add import Add
 from .minus import Minus
 from .mul import Mul
@@ -39,6 +37,14 @@ from .le import Le
 from .gt import Gt
 from .ge import Ge
 
+# nary ops
+from .and_ import And
+from .or_ import Or
+from .ed25519verify import Ed25519Verify
+
 # control flow
 from .if_ import If
 from .cond import Cond
+
+# misc
+from .scratch import ScratchSlot, ScratchLoad, ScratchStore

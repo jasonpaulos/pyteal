@@ -1,6 +1,7 @@
 from enum import Enum
 
 from ..types import TealType
+from ..ir import TealOp, Op
 from .expr import LeafExpr
 
 class TxnField(Enum):
@@ -92,7 +93,7 @@ class Txn(LeafExpr):
         return "(Txn {})".format(str_of_field[self.field])
 
     def __teal__(self):
-        return [["txn", str_of_field[self.field]]]
+        return [TealOp(Op.txn, str_of_field[self.field])]
    
     # a series of class methods for better programmer experience
     @classmethod

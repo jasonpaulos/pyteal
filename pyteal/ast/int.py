@@ -1,4 +1,5 @@
 from ..types import TealType
+from ..ir import TealOp, Op
 from ..errors import TealInputError
 from .expr import LeafExpr
 from .tmpl import Tmpl
@@ -18,7 +19,7 @@ class Int(LeafExpr):
             raise TealInputError("Int {} is out of range".format(value))
 
     def __teal__(self):
-        return [["int", str(self.value)]]
+        return [TealOp(Op.int, self.value)]
        
     def __str__(self):
         return "(Int: {})".format(self.value)

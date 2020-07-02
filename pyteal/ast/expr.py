@@ -5,10 +5,11 @@ pyteal expressions
 
 from abc import ABC, abstractmethod
 from enum import Enum
-from typing import ClassVar, List
+from typing import List
 
 from ..types import TealType
-     
+from ..ir import TealComponent
+
 class Expr(ABC):
 
      @abstractmethod
@@ -64,14 +65,14 @@ class Expr(ABC):
          return Mod(self, other)
     
      @abstractmethod
-     def __teal__(self):
+     def __teal__(self) -> List[TealComponent]:
          """Assemble teal IR"""
          pass
 
      # get teal program string
      def teal(self):
-         lines = [" ".join(i) for i in self.__teal__()]
-         return "\n".join(lines)
+         from ..compiler import compile
+         return compile(self)
         
      # logic and
      def And(self, other):

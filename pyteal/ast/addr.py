@@ -1,4 +1,5 @@
 from ..types import TealType, valid_address
+from ..ir import TealOp, Op
 from .expr import LeafExpr
 from .tmpl import Tmpl
 
@@ -13,7 +14,7 @@ class Addr(LeafExpr):
             self.address = address
 
     def __teal__(self):
-        return [["addr", self.address]]
+        return [TealOp(Op.addr, self.address)]
 
     def __str__(self):
         return "(address: {})".format(self.address)

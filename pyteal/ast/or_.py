@@ -1,4 +1,5 @@
 from ..types import TealType, require_type
+from ..ir import TealOp, Op
 from ..errors import TealInputError
 from .expr import Expr, BinaryExpr
 
@@ -18,10 +19,9 @@ class Or(BinaryExpr):
     def __teal__(self):
         code = []
         for i, a in enumerate(self.args):
-            if i == 0:
-                code = a.__teal__()
-            else:
-                code = code + a.__teal__() +[["||"]]
+            code += a.__teal__()
+            if i != 0:
+                code.append(TealOp(Op.logic_or))
         return code
         
     def __str__(self):

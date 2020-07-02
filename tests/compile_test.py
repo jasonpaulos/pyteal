@@ -190,9 +190,7 @@ txn FirstValid
 int 30000
 >
 &&
-int 1
-bnz l1
-pop
+b l1
 l0:
 gtxn 0 Sender
 gtxn 1 Sender

@@ -1,4 +1,5 @@
 from ..types import TealType, valid_base16, valid_base32, valid_base64
+from ..ir import TealOp, Op
 from ..errors import TealInputError
 from .expr import LeafExpr
 from .tmpl import Tmpl
@@ -36,9 +37,9 @@ class Bytes(LeafExpr):
 
     def __teal__(self):
         if self.base != "base16":
-            return [["byte", self.base, self.byte_str]]
+            return [TealOp(Op.byte, self.base, self.byte_str)]
         else:
-            return [["byte", "0x" + self.byte_str]]
+            return [TealOp(Op.byte, "0x" + self.byte_str)]
         
     def __str__(self):
         return "({} bytes: {})".format(self.base, self.byte_str)

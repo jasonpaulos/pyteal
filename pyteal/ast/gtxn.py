@@ -1,4 +1,5 @@
 from ..types import TealType, require_type
+from ..ir import TealOp, Op
 from ..errors import TealInputError
 from ..config import MAX_GROUP_SIZE
 from .expr import LeafExpr
@@ -19,7 +20,7 @@ class Gtxn(LeafExpr):
         return "(Gtxn {} {})".format(self.index, str_of_field[self.field])
 
     def __teal__(self):
-        return [["gtxn", str(self.index), str_of_field[self.field]]]
+        return [TealOp(Op.gtxn, self.index, str_of_field[self.field])]
    
     # a series of class methods for better programmer experience
     @classmethod

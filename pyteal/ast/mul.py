@@ -1,4 +1,5 @@
 from ..types import TealType, require_type
+from ..ir import TealOp, Op
 from .expr import Expr, BinaryExpr
 
 class Mul(BinaryExpr):
@@ -10,7 +11,7 @@ class Mul(BinaryExpr):
         self.right = right
 
     def __teal__(self):
-        return self.left.__teal__() + self.right.__teal__() + [["*"]]
+        return self.left.__teal__() + self.right.__teal__() + [TealOp(Op.mul)]
          
     def __str__(self):
         return "(* {} {})".format(self.left, self.right)

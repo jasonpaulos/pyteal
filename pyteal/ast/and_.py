@@ -1,5 +1,6 @@
 from ..types import TealType, require_type
 from ..errors import TealInputError
+from ..ir import TealOp, Op
 from .expr import Expr, BinaryExpr
 
 class And(BinaryExpr):
@@ -18,10 +19,9 @@ class And(BinaryExpr):
     def __teal__(self):
         code = []
         for i, a in enumerate(self.args):
-            if i == 0:
-                code = a.__teal__()
-            else:
-                code = code + a.__teal__() +[["&&"]]
+            code += a.__teal__()
+            if i != 0:
+                code.append(TealOp(Op.logic_and))
         return code
 
     def __str__(self):

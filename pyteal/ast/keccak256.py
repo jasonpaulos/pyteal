@@ -1,4 +1,5 @@
 from ..types import TealType, require_type
+from ..ir import TealOp, Op
 from .expr import Expr, UnaryExpr
 
 class Keccak256(UnaryExpr):    
@@ -9,7 +10,7 @@ class Keccak256(UnaryExpr):
         self.child = child
 
     def __teal__(self):
-        return self.child.__teal__() + [["keccak256"]]
+        return self.child.__teal__() + [TealOp(Op.keccak256)]
          
     def __str__(self):
          return "(keccak {})".format(self.child)

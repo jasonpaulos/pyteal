@@ -1,4 +1,5 @@
 from ..types import TealType, require_type
+from ..ir import TealOp, Op
 from .expr import Expr, BinaryExpr
 
 class Ge(BinaryExpr):
@@ -11,7 +12,7 @@ class Ge(BinaryExpr):
         self.right = right
 
     def __teal__(self):
-        return self.left.__teal__() + self.right.__teal__() + [[">="]]
+        return self.left.__teal__() + self.right.__teal__() + [TealOp(Op.ge)]
 
     def __str__(self):
         return "(>= {} {})".format(self.left, self.right)

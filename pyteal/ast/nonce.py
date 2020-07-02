@@ -1,4 +1,5 @@
 from .expr import Expr, UnaryExpr
+from ..ir import TealOp, Op
 from .bytes import Bytes
 
 class Nonce(UnaryExpr):
@@ -9,7 +10,7 @@ class Nonce(UnaryExpr):
         self.nonce_bytes = Bytes(base, nonce)
 
     def __teal__(self):
-        return self.nonce_bytes.__teal__() + [["pop"]] + self.child.__teal__()
+        return self.nonce_bytes.__teal__() + [TealOp(Op.pop)] + self.child.__teal__()
         
     def __str__(self):
         return "(nonce: {}) {}".format(self.nonce_bytes.__str__(), self.child.__str__())

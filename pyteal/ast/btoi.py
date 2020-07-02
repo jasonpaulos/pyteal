@@ -1,4 +1,5 @@
 from ..types import TealType, require_type
+from ..ir import TealOp, Op
 from .expr import Expr, UnaryExpr
 
 class Btoi(UnaryExpr):
@@ -9,7 +10,9 @@ class Btoi(UnaryExpr):
         self.child = child
 
     def __teal__(self):
-        return self.child.__teal__() + [["btoi"]]
+        teal = self.child.__teal__()
+        teal.append(TealOp(Op.btoi))
+        return teal
          
     def __str__(self):
          return "(btoi {})".format(self.child)

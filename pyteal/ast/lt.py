@@ -1,4 +1,5 @@
 from ..types import TealType, require_type
+from ..ir import TealOp, Op
 from .expr import Expr, BinaryExpr
 
 # less than
@@ -12,7 +13,7 @@ class Lt(BinaryExpr):
          self.right = right
 
     def __teal__(self):
-        return self.left.__teal__() + self.right.__teal__() + [["<"]]
+        return self.left.__teal__() + self.right.__teal__() + [TealOp(Op.lt)]
          
     def __str__(self):
         return "(< {} {})".format(self.left, self.right)

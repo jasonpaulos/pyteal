@@ -1,4 +1,5 @@
 from ..types import TealType, types_match
+from ..ir import TealOp, Op
 from ..errors import TealTypeMismatchError
 from .expr import Expr, BinaryExpr
 
@@ -17,7 +18,7 @@ class Eq(BinaryExpr):
         self.right = right
 
     def __teal__(self):
-        return self.left.__teal__() + self.right.__teal__() + [["=="]]
+        return self.left.__teal__() + self.right.__teal__() + [TealOp(Op.eq)]
         
     def __str__(self):
          return "(== {} {})".format(self.left, self.right)

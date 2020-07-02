@@ -1,4 +1,5 @@
 from ..types import TealType, require_type
+from ..ir import TealOp, Op
 from .expr import Expr, UnaryExpr
 
 # return the length of a bytes value
@@ -10,7 +11,7 @@ class Len(UnaryExpr):
         self.child = child
 
     def __teal__(self):
-        return self.child.__teal__() + [["len"]]
+        return self.child.__teal__() + [TealOp(Op.len_)]
          
     def __str__(self):
          return "(len {})".format(self.child)
