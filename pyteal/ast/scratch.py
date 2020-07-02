@@ -12,8 +12,8 @@ class ScratchSlot:
     def store(self):
         return ScratchStore(self)
 
-    def load(self):
-        return ScratchLoad(self)
+    def load(self, type: TealType = TealType.anytype):
+        return ScratchLoad(self, type)
     
     def __str__(self):
         return "slot#{}".format(self.id)
@@ -28,8 +28,9 @@ class ScratchSlot:
 
 class ScratchLoad(LeafExpr):
 
-    def __init__(self, slot: ScratchSlot):
+    def __init__(self, slot: ScratchSlot, type: TealType = TealType.anytype):
         self.slot = slot
+        self.type = type
 
     def __str__(self):
         return "(Load {})".format(self.slot.__str__())
@@ -39,7 +40,7 @@ class ScratchLoad(LeafExpr):
         return [TealOp(Op.load, self.slot)]
 
     def type_of(self):
-        return TealType.anytype
+        return self.type
 
 class ScratchStore(LeafExpr):
 
