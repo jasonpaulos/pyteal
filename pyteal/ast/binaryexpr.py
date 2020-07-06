@@ -11,6 +11,11 @@ class BinaryExpr(Expr):
         self.argLeft = argLeft
         self.argRight = argRight
 
+    def accept(self, visitor):
+        self.argLeft.accept(visitor)
+        self.argRight.accept(visitor)
+        visitor.visitBinaryExpr(self)
+
     def __teal__(self):
         teal = self.argLeft.__teal__() + self.argRight.__teal__()
         teal.append(TealOp(self.op))

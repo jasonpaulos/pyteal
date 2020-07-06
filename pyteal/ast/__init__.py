@@ -1,5 +1,6 @@
 # abstract types
 from .expr import Expr
+from .astvisitor import ASTVisitor
 
 # basic types
 from .leafexpr import LeafExpr

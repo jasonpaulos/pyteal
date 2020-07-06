@@ -2,11 +2,11 @@ from ..types import TealType, require_type
 from ..ir import TealOp, Op, TealLabel
 from ..errors import TealInputError
 from ..util import new_label
-from .expr import NaryExpr
+from .expr import Expr
 from .err import Err
 from .if_ import If
 
-class Cond(NaryExpr):
+class Cond(Expr):
 
     # default constructor
     def __init__(self, *argv):
@@ -31,7 +31,13 @@ class Cond(NaryExpr):
                 require_type(arg[1].type_of(), value_type)
 
         self.value_type = value_type        
-        self.args = argv        
+        self.args = argv
+
+    def accept(self, visitor):
+        for arg in self.args:
+            arg[0].accept(visitor)
+            arg[1].accept(visitor)
+        visitor.visitCond(self)    
 
     def __teal__(self):
         teal = []

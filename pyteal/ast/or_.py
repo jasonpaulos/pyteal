@@ -15,7 +15,7 @@ class Or(NaryExpr):
                 raise TealInputError("{} is not a pyteal expression.".format(arg))
             require_type(arg.type_of(), TealType.uint64)
 
-        self.args = argv
+        super().__init__(argv)
 
     def __teal__(self):
         code = []

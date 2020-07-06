@@ -2,9 +2,9 @@ from ..types import TealType, require_type, types_match
 from ..ir import TealOp, Op, TealLabel
 from ..errors import TealTypeMismatchError
 from ..util import new_label
-from .expr import Expr, NaryExpr
+from .expr import Expr
 
-class If(NaryExpr):
+class If(Expr):
 
     #default constructor
     def __init__(self, arg0:Expr, arg1:Expr, arg2:Expr) -> None:
@@ -16,6 +16,11 @@ class If(NaryExpr):
             raise TealTypeMismatchError(t1, t2)
 
         self.args = [arg0, arg1, arg2]
+
+    def accept(self, visitor):
+        for arg in self.args:
+            arg.accept(visitor)
+        visitor.visitIf(self)
 
     def __teal__(self):
         cond = self.args[0].__teal__()

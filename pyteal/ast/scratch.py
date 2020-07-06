@@ -32,6 +32,9 @@ class ScratchLoad(Expr):
         self.slot = slot
         self.type = type
 
+    def accept(self, visitor):
+        visitor.visitScratchLoad(self)
+
     def __str__(self):
         return "(Load {})".format(self.slot.__str__())
 
@@ -46,6 +49,9 @@ class ScratchStore(Expr):
 
     def __init__(self, slot: ScratchSlot):
         self.slot = slot
+
+    def accept(self, visitor):
+        visitor.visitScratchStore(self)
 
     def __str__(self):
         return "(Store {})".format(self.slot.__str__())

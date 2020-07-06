@@ -9,6 +9,10 @@ class UnaryExpr(Expr):
         self.outputType = outputType
         self.arg = arg
 
+    def accept(self, visitor):
+        self.arg.accept(visitor)
+        visitor.visitUnaryExpr(self)
+
     def __teal__(self):
         teal = self.arg.__teal__()
         teal.append(TealOp(self.op))

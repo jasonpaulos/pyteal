@@ -5,12 +5,18 @@ pyteal expressions
 
 from abc import ABC, abstractmethod
 from enum import Enum
-from typing import List
+from typing import List, TYPE_CHECKING
 
 from ..types import TealType
 from ..ir import TealComponent
+if TYPE_CHECKING:
+    from .astvisitor import ASTVisitor
 
 class Expr(ABC):
+
+    @abstractmethod
+    def accept(self, visitor: 'ASTVisitor'):
+        pass
 
     @abstractmethod
     def type_of(self) -> TealType:
