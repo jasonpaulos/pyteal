@@ -2,7 +2,7 @@ from ..types import TealType, require_type
 from ..ir import TealOp, Op
 from ..errors import TealInputError
 from ..config import MAX_GROUP_SIZE
-from .expr import LeafExpr
+from .leafexpr import LeafExpr
 from .txn import TxnField, str_of_field, type_of_field
 
 class Gtxn(LeafExpr):

@@ -1,5 +1,5 @@
 from ..types import TealType
-from .expr import LeafExpr
+from .expr import Expr
 
 class ScratchSlot:
 
@@ -26,7 +26,7 @@ class ScratchSlot:
     def __hash__(self):
         return hash(self.id)
 
-class ScratchLoad(LeafExpr):
+class ScratchLoad(Expr):
 
     def __init__(self, slot: ScratchSlot, type: TealType = TealType.anytype):
         self.slot = slot
@@ -42,7 +42,7 @@ class ScratchLoad(LeafExpr):
     def type_of(self):
         return self.type
 
-class ScratchStore(LeafExpr):
+class ScratchStore(Expr):
 
     def __init__(self, slot: ScratchSlot):
         self.slot = slot

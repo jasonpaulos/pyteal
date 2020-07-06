@@ -1,8 +1,8 @@
-from .expr import Expr, UnaryExpr
+from .expr import Expr
 from ..ir import TealOp, Op
 from .bytes import Bytes
 
-class Nonce(UnaryExpr):
+class Nonce(Expr):
 
     #default constructor
     def __init__(self, base:str, nonce:str, child:Expr) -> None:

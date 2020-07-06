@@ -1,6 +1,7 @@
 from ..types import TealType, require_type
 from ..ir import TealOp, Op
-from .expr import Expr, NaryExpr
+from .expr import Expr
+from .naryexpr import NaryExpr
 
 # ed25519 signature verification
 class Ed25519Verify(NaryExpr):

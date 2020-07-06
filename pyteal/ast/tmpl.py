@@ -1,6 +1,6 @@
 from ..types import valid_tmpl
 from ..errors import TealInternalError
-from .expr import LeafExpr
+from .leafexpr import LeafExpr
 
 class Tmpl(LeafExpr):
 

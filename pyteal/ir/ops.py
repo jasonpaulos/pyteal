@@ -19,7 +19,7 @@ class Op(Enum):
     eq = "=="
     neq = "!="
     logic_not = "!"
-    len_ = "len"
+    len = "len"
     itob = "itob"
     btoi = "btoi"
     mod = "%"

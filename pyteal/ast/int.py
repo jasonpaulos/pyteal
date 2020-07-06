@@ -1,7 +1,7 @@
 from ..types import TealType
 from ..ir import TealOp, Op
 from ..errors import TealInputError
-from .expr import LeafExpr
+from .leafexpr import LeafExpr
 from .tmpl import Tmpl
 
 class Int(LeafExpr):

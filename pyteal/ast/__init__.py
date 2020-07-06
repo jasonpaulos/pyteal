@@ -1,7 +1,8 @@
 # abstract types
-from .expr import TealType, Expr, LeafExpr, UnaryExpr, BinaryExpr, NaryExpr
+from .expr import Expr
 
 # basic types
+from .leafexpr import LeafExpr
 from .addr import Addr
 from .bytes import Bytes
 from .err import Err
@@ -18,26 +19,13 @@ from .tmpl import Tmpl
 from .nonce import Nonce
 
 # unary ops
-from .btoi import Btoi
-from .itob import Itob
-from .len import Len
-from .sha256 import Sha256
-from .sha512_256 import Sha512_256
-from .keccak256 import Keccak256
+from .unaryexpr import UnaryExpr, Btoi, Itob, Len, Sha256, Sha512_256, Keccak256, Pop
 
 # binary ops
-from .add import Add
-from .minus import Minus
-from .mul import Mul
-from .div import Div
-from .mod import Mod
-from .eq import Eq
-from .lt import Lt
-from .le import Le
-from .gt import Gt
-from .ge import Ge
+from .binaryexpr import BinaryExpr, Add, Minus, Mul, Div, Mod, Eq, Lt, Le, Gt, Ge
 
 # nary ops
+from .naryexpr import NaryExpr
 from .and_ import And
 from .or_ import Or
 from .ed25519verify import Ed25519Verify

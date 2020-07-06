@@ -2,7 +2,7 @@ from enum import Enum
 
 from ..types import TealType
 from ..ir import TealOp, Op
-from .expr import LeafExpr
+from .leafexpr import LeafExpr
 
 class GlobalField(Enum):
      min_txn_fee = 0

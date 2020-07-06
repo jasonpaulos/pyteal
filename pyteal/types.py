@@ -10,7 +10,7 @@ class TealType(Enum):
     none = 3
 
 def require_type(actual, expected):
-    if actual != expected and (actual != TealType.anytype) and (expected != TealType.anytype):
+    if actual != expected and (expected == TealType.none or (actual != TealType.anytype and expected != TealType.anytype)):
         raise TealTypeError(actual, expected)
 
 def types_match(type1: TealType, type2: TealType) -> bool:

@@ -1,7 +1,7 @@
 from ..types import TealType, valid_base16, valid_base32, valid_base64
 from ..ir import TealOp, Op
 from ..errors import TealInputError
-from .expr import LeafExpr
+from .leafexpr import LeafExpr
 from .tmpl import Tmpl
 
 class Bytes(LeafExpr):

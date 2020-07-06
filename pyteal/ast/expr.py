@@ -12,86 +12,74 @@ from ..ir import TealComponent
 
 class Expr(ABC):
 
-     @abstractmethod
-     def type_of(self) -> TealType:
-          """Returns a TealType enum describing the expression's return type
-          """
-          pass
+    @abstractmethod
+    def type_of(self) -> TealType:
+        """Returns a TealType enum describing the expression's return type
+        """
+        pass
 
-     @abstractmethod
-     def __str__(self) -> str:
-          """Returns the string representation of the experssion
-          """
-          pass
-     
-     def __lt__(self, other):
-         from .lt import Lt
-         return Lt(self, other)
-
-     def __gt__(self, other):
-         from .gt import Gt
-         return Gt(self, other)
-
-     def __le__(self, other):
-         from .le import Le
-         return Le(self, other)
-
-     def __ge__(self, other):
-         from .ge import Ge
-         return Ge(self, other)
-
-     def __eq__(self, other):
-         from .eq import Eq
-         return Eq(self, other)
-
-     def __add__(self, other):
-         from .add import Add
-         return Add(self, other)
-
-     def __sub__(self, other):
-         from .minus import Minus
-         return Minus(self, other)
-
-     def __mul__(self, other):
-         from .mul import Mul
-         return Mul(self, other)
-
-     def __truediv__(self, other):
-         from .div import Div
-         return Div(self, other)
-
-     def __mod__(self, other):
-         from .mod import Mod
-         return Mod(self, other)
+    @abstractmethod
+    def __str__(self) -> str:
+        """Returns the string representation of the experssion
+        """
+        pass
     
-     @abstractmethod
-     def __teal__(self) -> List[TealComponent]:
-         """Assemble teal IR"""
-         pass
+    def __lt__(self, other):
+        from .binaryexpr import Lt
+        return Lt(self, other)
 
-     # get teal program string
-     def teal(self):
-         from ..compiler import compile
-         return compile(self)
-        
-     # logic and
-     def And(self, other):
-          from .and_ import And
-          return And(self, other)
+    def __gt__(self, other):
+        from .binaryexpr import Gt
+        return Gt(self, other)
 
-     # logic or
-     def Or(self, other):
-          from .or_ import Or
-          return Or(self, other)
+    def __le__(self, other):
+        from .binaryexpr import Le
+        return Le(self, other)
 
-class BinaryExpr(Expr):
-     pass
+    def __ge__(self, other):
+        from .binaryexpr import Ge
+        return Ge(self, other)
 
-class UnaryExpr(Expr):
-     pass
+    def __eq__(self, other):
+        from .binaryexpr import Eq
+        return Eq(self, other)
 
-class NaryExpr(Expr):
-     pass
+    def __add__(self, other):
+        from .binaryexpr import Add
+        return Add(self, other)
 
-class LeafExpr(Expr):
-     pass
+    def __sub__(self, other):
+        from .binaryexpr import Minus
+        return Minus(self, other)
+
+    def __mul__(self, other):
+        from .binaryexpr import Mul
+        return Mul(self, other)
+
+    def __truediv__(self, other):
+        from .binaryexpr import Div
+        return Div(self, other)
+
+    def __mod__(self, other):
+        from .binaryexpr import Mod
+        return Mod(self, other)
+    
+    @abstractmethod
+    def __teal__(self) -> List[TealComponent]:
+        """Assemble teal IR"""
+        pass
+
+    # get teal program string
+    def teal(self):
+        from ..compiler import compile
+        return compile(self)
+       
+    # logic and
+    def And(self, other):
+        from .and_ import And
+        return And(self, other)
+
+    # logic or
+    def Or(self, other):
+        from .or_ import Or
+        return Or(self, other)

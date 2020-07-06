@@ -1,6 +1,6 @@
 from ..types import TealType, valid_address
 from ..ir import TealOp, Op
-from .expr import LeafExpr
+from .leafexpr import LeafExpr
 from .tmpl import Tmpl
 
 class Addr(LeafExpr):

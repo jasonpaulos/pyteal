@@ -1,9 +1,10 @@
 from ..types import TealType, require_type
 from ..ir import TealOp, Op
 from ..errors import TealInputError
-from .expr import Expr, BinaryExpr
+from .expr import Expr
+from .naryexpr import NaryExpr
 
-class Or(BinaryExpr):
+class Or(NaryExpr):
 
     # default constructor
     def __init__(self, *argv):
