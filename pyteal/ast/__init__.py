@@ -19,6 +19,7 @@ from .asset import AssetHolding, AssetParam
 # meta
 from .tmpl import Tmpl
 from .nonce import Nonce
+from .storage import *
 
 # unary ops
 from .unaryexpr import UnaryExpr, Btoi, Itob, Len, Sha256, Sha512_256, Keccak256, Not, BitwiseNot, Pop, Return, Balance

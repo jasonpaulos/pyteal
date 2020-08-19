@@ -225,7 +225,11 @@ class Gtxn(LeafExpr):
             self.accessField = accessField
             self.lengthField = lengthField
         
-        def length(self):
+        def __len__(self) -> LeafExpr:
+            """Get the length of this array."""
+            return Gtxn(self.txIndex, self.lengthField)
+        
+        def length(self) -> LeafExpr:
             """Get the length of this array."""
             return Gtxn(self.txIndex, self.lengthField)
         

@@ -3,6 +3,7 @@ from enum import Enum
 from ..types import TealType
 from ..ir import TealOp, Op
 from .leafexpr import LeafExpr
+from .storage import GlobalStorageAccessor
 
 class GlobalField(Enum):
     min_txn_fee = (0, "MinTxnFee", TealType.uint64)
@@ -89,3 +90,5 @@ class Global(LeafExpr):
         
         Fails if no application is executing."""
         return cls(GlobalField.current_app_id)
+    
+    storage = GlobalStorageAccessor()

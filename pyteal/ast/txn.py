@@ -4,7 +4,8 @@ from ..types import TealType
 from ..errors import TealInputError
 from ..ir import TealOp, Op
 from .leafexpr import LeafExpr
-from .int import EnumInt
+from .int import Int, EnumInt
+from .storage import AccountsStorage, LocalStorageAccessor, ForeignAppsStorage
 
 class TxnType:
     """Enum of all possible transaction types."""
@@ -348,3 +349,9 @@ class Txn(LeafExpr):
 
     """Accounts array"""
     accounts = ArrayAccessor(TxnField.accounts, TxnField.num_accounts)
+
+    accountStorage = AccountsStorage()
+
+    senderStorage = LocalStorageAccessor(Int(0))
+
+    foreignAppStorage = ForeignAppsStorage()
